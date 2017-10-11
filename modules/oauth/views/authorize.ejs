@@ -1,0 +1,25 @@
+<html>
+        <head>
+            <title>Add server informations</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+        </head>
+        <body>
+            <div class="container">
+                <div class="row align-items-center" style="min-height: 100vh">
+                    <div class="col">
+                        <h1><%= __('allow_info_access', { clientName: client_id }) %></h1>
+                        
+                        <form action="" method="post">
+                            <input type="hidden" name="redirect_uri" value="<%= redirect_uri%>"/>
+                            <input type="hidden" name="state" value="<%= oauth_state %>"/>
+                            <input type="hidden" name="response_type" value="code"/>
+                            <input class="btn btn-primary" type="submit" value="<%= __('Allow') %>"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </html>

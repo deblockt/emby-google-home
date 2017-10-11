@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title><%= __('Sign Up to emby for google home') %></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row align-items-center" style="min-height: 100vh">
+                <div class="col">
+                    <h1><%= __('Sign Up') %></h1>
+                    
+                    <p> <%= __('Sign up here, if you want to use google home or google assistant to talk with emby') %> </p>
+
+                    <%if (error) { %>
+                        <div class="alert alert-danger" role="alert">
+                            <%= __('Email already used') %>
+                        </div>
+                    <% } %>
+
+                    <form method="post" action="/signUp">
+                        <div class="form-group">
+                            <label for="email"><%= __('Email') %></label>
+                            <input id="email" class="form-control" name="username" type="email" placeholder="<%= __('email') %>" required/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password"><%= __('Password') %></label>
+                            <input id="password" name="password" class="form-control" type="password" placeholder="<%= __('password') %>" required/>
+                        </div>
+
+                        <input class="btn btn-primary" type="submit"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

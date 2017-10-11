@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "target": "es5",
+      "lib": ["es2015"],
+      "outDir": "",
+      "module": "commonjs",
+      "strictNullChecks": true,
+      "removeComments": true,
+      "noUnusedLocals": true,
+      "moduleResolution": "node",
+      "types": ["crypto-js"]
+    },
+    "include": [
+      "*.ts",
+      "modules/**/*.ts",
+      "translations/*.ts",
+      "emby/*.ts"
+    ]
+}

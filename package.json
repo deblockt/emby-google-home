@@ -1,0 +1,36 @@
+{
+  "name": "emby-google-home",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "postinstall": "tsc || true"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^3.5.0"
+  },
+  "dependencies": {
+    "@types/crypto-js": "^3.1.35",
+    "actions-on-google": "^1.2.1",
+    "actions-on-google-ts": "^1.2.1-3",
+    "body-parser": "^1.17.2",
+    "co-views": "^2.1.0",
+    "crypto-js": "^3.1.9-1",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "express-oauth-server": "^2.0.0",
+    "express-session": "^1.15.5",
+    "fuse.js": "^3.0.5",
+    "i18n": "^0.8.3",
+    "pg-promise": "^6.5.1",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "sprintf-js": "^1.1.1",
+    "typescript": "^2.4.2",
+    "util": "^0.10.3"
+  }
+}
