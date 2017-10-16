@@ -1,4 +1,5 @@
 import { ApiAiApp } from 'actions-on-google-ts'
+
 import * as express from 'express'
 import * as Fuse from 'fuse.js'
 
@@ -18,7 +19,7 @@ const FUSE_OPTION = {
     minMatchCharLength: 2,
     keys: [
       "DeviceName"
-  ]
+    ]
 };
 
 /**
@@ -97,30 +98,39 @@ const lookForDevice = async (client: ApiClient, translation: Translation, app: A
         ).map(result => result.item)
     
         console.log("filtredDevice", filteredDevices)
-        const buildDeviceOption = (device) => app.buildOptionItem(device.DeviceId, []).setTitle(device.DeviceName)
         if (filteredDevices.length == 0) {
             if (controllableDevices.length == 0) {
                 console.log("No device found")
                 app.tell(translation.get('noDeviceAvailable'))
             } else {
                 console.log("multiple device found. send list")
-                const options = controllableDevices.map(buildDeviceOption)
                 app.setContext('device-list', 5, {deviceList: controllableDevices})
-    
-                app.askWithList(translation.get('noDeviceFoundByName'),
-                    app.buildList(translation.get('deviceList')).addItems(options)
-                )
+                askForDeviceWithList(app, translation, filter, controllableDevices)
             }
         } else if (filteredDevices.length > 1) {
-            const options = filteredDevices.map(buildDeviceOption)
             app.setContext('device-list', 5, {deviceList: filteredDevices})
-    
-            app.askWithList(translation.get('tooManyDevices', [filter]),
-                app.buildList(translation.get('deviceList')).addItems(options)
-            )
+            askForDeviceWithList(app, translation, filter, filteredDevices)
         } else {
             const device = filteredDevices[0]
             playMovieOnDevice(app, movie, device, client, translation)
+        }
+    }
+}
+
+const askForDeviceWithList = (app: ApiAiApp, translation: Translation, filter: string, deviceList: Session[]) => {
+    if ("actions.capability.SCREEN_OUTPUT" in app.getSurfaceCapabilities()) {
+        const buildDeviceOption = (device) => app.buildOptionItem(device.DeviceId, []).setTitle(device.DeviceName)
+        const options = deviceList.map(buildDeviceOption)
+        app.askWithList(translation.get('tooManyDevices', [filter]),
+            app.buildList(translation.get('deviceList')).addItems(options)
+        )
+    } else {
+        const sentence = translation.get('tooManyDevices', [filter])
+        if (deviceList.length < 5) {
+            const deviceListString = deviceList.map((device) => device.DeviceName).join(".\n")
+            app.ask(sentence + "." + deviceListString)
+        } else {
+            app.ask(sentence)
         }
     }
 }
