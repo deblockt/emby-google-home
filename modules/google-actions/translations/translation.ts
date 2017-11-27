@@ -24,8 +24,12 @@ export class TranslationFactory {
         language = language || 'fr-FR'
         
         if (this.translations[language] == undefined) {
-            const translations = await languageImporter.run(language)
-            this.translations[language] = new Translation(translations.translations)
+            try {
+                const translations = await languageImporter.run(language)
+                this.translations[language] = new Translation(translations.translations)
+            } catch (e) {
+                return TranslationFactory.create('fr-FR')
+            }
         }
         return this.translations[language]        
     }
