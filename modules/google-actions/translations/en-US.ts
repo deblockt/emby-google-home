@@ -34,5 +34,8 @@ export const translations = {
     ],
     'no_server_infos': [
         'No information on your server could be recovered. Please sign in on https://emby-google-home.herokuapp.com/login to fill your server informations'
+    ],
+    'unable_to_contact': [
+        'Unable to contact your emby server. Try to reconfigure your account'
     ]
 }

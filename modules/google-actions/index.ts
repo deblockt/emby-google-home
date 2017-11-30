@@ -225,7 +225,8 @@ const useApiClient = (funct : (ApiAiApp, ApiClient, Translation) => Promise<any>
                 }
             } catch (e) {
                 console.error("UN ERREUR EST SURVENUE ", e)
-                app.tell("error is happend. Try latter")
+                const translation = await TranslationFactory.create(app.getUserLocale())
+                app.tell(translation.get("unable_to_contact"))
             }
         } else {
             console.log("ASK FOR SIGNIN")
